@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>TFC Forging Calculator</title>
+<style>
+body { font-family: sans-serif; }
+.container { margin:20px; }
+.tiles { display:flex; gap:8px; flex-wrap:wrap; margin:10px 0; }
+.tile {
+    padding:10px 14px;
+    border-radius:6px;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+.output { margin-top:20px; font-size:18px; }
+
+.cyan{background:cyan;color:black;}
+.lightblue{background:#87CEFA;}
+.navy{background:navy;}
+.purple{background:purple;}
+.lime{background:lime;color:black;}
+.yellow{background:yellow;color:black;}
+.orange{background:orange;}
+.red{background:red;}
+</style>
+</head>
+<body>
+<div class="container">
+<h2>Number Combination Solver</h2>
+
+<label>目標値: </label>
+<input type="number" id="target" min="0" max="200" value="77">
+
+<h3>制限</h3>
+<div id="restriction" class="tiles"></div>
+
+<h3>使える数字タイル</h3>
+<div id="palette" class="tiles"></div>
+
+<button onclick="solve()">計算</button>
+
+<div class="output" id="result"></div>
+</div>
+
+<script>
+const numbers = [
+    {v:-3, cls:"cyan"},
+    {v:-6, cls:"lightblue"},
+    {v:-9, cls:"navy"},
+    {v:-15, cls:"purple"},
+    {v:2, cls:"lime"},
+    {v:7, cls:"yellow"},
+    {v:13, cls:"orange"},
+    {v:16, cls:"red"},
+];
+
+const restrictionDiv = document.getElementById("restriction");
+const paletteDiv = document.getElementById("palette");
+
+numbers.forEach(n=>{
+    const t=document.createElement("div");
+    t.className="tile "+n.cls;
+    t.textContent=n.v;
+    t.onclick=()=>{
+        if(restrictionDiv.children.length<3){
+            const copy=t.cloneNode(true);
+            copy.onclick=()=>restrictionDiv.removeChild(copy);
+            restrictionDiv.appendChild(copy);
+        }
+    };
+    paletteDiv.appendChild(t);
+});
+
+function solve(){
+    const target=parseInt(document.getElementById("target").value);
+    const restrictions=[...restrictionDiv.children].map(t=>parseInt(t.textContent));
+    const restrictionSum=restrictions.reduce((a,b)=>a+b,0);
+    const remain=target-restrictionSum;
+
+    const resultDiv=document.getElementById("result");
+    resultDiv.innerHTML="探索中...";
+
+    const vals=numbers.map(n=>n.v);
+
+    const MAX=400;
+    const visited=new Set();
+    const queue=[];
+
+    queue.push({sum:0, path:[]});
+    visited.add(0);
+
+    while(queue.length>0){
+        const current=queue.shift();
+
+        if(current.sum===remain){
+            displaySolution(current.path,restrictions);
+            return;
+        }
+
+        for(let v of vals){
+            const nextSum=current.sum+v;
+
+            if(nextSum<-MAX || nextSum>MAX) continue;
+            if(visited.has(nextSum)) continue;
+
+            visited.add(nextSum);
+            queue.push({
+                sum:nextSum,
+                path:[...current.path, v]
+            });
+        }
+    }
+
+    resultDiv.innerHTML="解なし";
+}
+function displaySolution(core,restrictions){
+    const resultDiv=document.getElementById("result");
+    resultDiv.innerHTML="";
+
+    const counts={};
+    core.forEach(v=>counts[v]=(counts[v]||0)+1);
+
+    const sorted=Object.keys(counts)
+        .map(Number)
+        .sort((a,b)=>a-b);
+
+    sorted.forEach(v=>{
+        for(let i=0;i<counts[v];i++){
+            addTile(v);
+        }
+    });
+
+    restrictions.forEach(v=>addTile(v));
+}
+
+function addTile(v){
+    const n=numbers.find(x=>x.v===v);
+    const t=document.createElement("div");
+    t.className="tile "+n.cls;
+    t.textContent=v;
+    document.getElementById("result").appendChild(t);
+}
+</script>
+</body>
+</html>
