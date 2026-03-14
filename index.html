@@ -1,147 +1,310 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>TFC Forging Calculator</title>
-<style>
-body { font-family: sans-serif; }
-.container { margin:20px; }
-.tiles { display:flex; gap:8px; flex-wrap:wrap; margin:10px 0; }
-.tile {
-    padding:10px 14px;
-    border-radius:6px;
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
-}
-.output { margin-top:20px; font-size:18px; }
+    <head>
+        <meta charset="UTF-8" />
+        <title>TFC Forging Calculator</title>
+        <style>
+            body {
+                font-family: sans-serif;
+                user-select: none;
+            }
+            .container {
+                margin: 20px;
+            }
 
-.cyan{background:cyan;color:black;}
-.lightblue{background:#87CEFA;}
-.navy{background:navy;}
-.purple{background:purple;}
-.lime{background:lime;color:black;}
-.yellow{background:yellow;color:black;}
-.orange{background:orange;}
-.red{background:red;}
-</style>
-</head>
-<body>
-<div class="container">
-<h2>Number Combination Solver</h2>
+            .input-number {
+                width: 40px;
+            }
 
-<label>目標値: </label>
-<input type="number" id="target" min="0" max="200" value="77">
+            .tiles {
+                display: flex;
+                gap: 8px;
+                flex-wrap: wrap;
+                margin: 10px 0;
+            }
+            .tiles::after {
+                content: "";
+                height: 20px;
+                padding: 10px 10px;
+            }
+            
+            .tile {
+                width: 20px;
+                height: 20px;
+                padding: 10px 10px;
+                border-radius: 6px;
+                color: white;
+                font-weight: bold;
+                cursor: pointer;
+            }
+            .output-tile {
+                height: 20px;
+                padding: 10px 10px;
+                border-radius: 6px;
+                color: white;
+                font-weight: bold;
+            }
+            .output {
+                margin-top: 20px;
+                font-size: 18px;
+            }
 
-<h3>制限</h3>
-<div id="restriction" class="tiles"></div>
+            .cyan {
+                background: cyan;
+                color: black;
+            }
+            .lightblue {
+                background: #87cefa;
+            }
+            .navy {
+                background: navy;
+            }
+            .purple {
+                background: purple;
+            }
+            .lime {
+                background: lime;
+                color: black;
+            }
+            .yellow {
+                background: yellow;
+                color: black;
+            }
+            .orange {
+                background: orange;
+            }
+            .red {
+                background: red;
+            }
 
-<h3>使える数字タイル</h3>
-<div id="palette" class="tiles"></div>
+            h1, h2, h3, h4 {
+                margin: 0;
+            }
 
-<button onclick="solve()">計算</button>
+            .in-div-img {
+                width: 100%;
+                margin-top: 10px;
+            }
 
-<div class="output" id="result"></div>
-</div>
+            .container-box {
+                padding: 10px;
+                margin-top: 10px;
+                background-color: #ccc;
 
-<script>
-const numbers = [
-    {v:-3, cls:"cyan"},
-    {v:-6, cls:"lightblue"},
-    {v:-9, cls:"navy"},
-    {v:-15, cls:"purple"},
-    {v:2, cls:"lime"},
-    {v:7, cls:"yellow"},
-    {v:13, cls:"orange"},
-    {v:16, cls:"red"},
-];
+                border-radius: 5px;
+            }
 
-const restrictionDiv = document.getElementById("restriction");
-const paletteDiv = document.getElementById("palette");
+            #restriction {
+                /* height: 60px; */
+            }
 
-numbers.forEach(n=>{
-    const t=document.createElement("div");
-    t.className="tile "+n.cls;
-    t.textContent=n.v;
-    t.onclick=()=>{
-        if(restrictionDiv.children.length<3){
-            const copy=t.cloneNode(true);
-            copy.onclick=()=>restrictionDiv.removeChild(copy);
-            restrictionDiv.appendChild(copy);
-        }
-    };
-    paletteDiv.appendChild(t);
-});
+            .initial-val-icon {
+                color: green;
+            }
 
-function solve(){
-    const target=parseInt(document.getElementById("target").value);
-    const restrictions=[...restrictionDiv.children].map(t=>parseInt(t.textContent));
-    const restrictionSum=restrictions.reduce((a,b)=>a+b,0);
-    const remain=target-restrictionSum;
+            .target-val-icon {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="container-box">
+                <h2>TFC Forging Calculator</h2>
+                <img class="in-div-img" src="./files/forging-gui-mark.jpg" alt="" />
+            </div>
 
-    const resultDiv=document.getElementById("result");
-    resultDiv.innerHTML="探索中...";
+            <div class="input-box container-box">
+                <h3>① 目標値を入力</h3>
+                <div>
+                    <span class="initial-val-icon">▲</span>
+                    <label>初期値: </label>
+                    <input type="number" id="initial" class="input-number" value="0" />
+                </div>
+                <div>
+                    <span class="target-val-icon">▼</span>
+                    <label>目標値: </label>
+                    <input type="number" id="target" class="input-number" value="48" />
+                </div>
+            </div>
+            <div class="input-box container-box">
+                <h3>② 制限を入力</h3>
+                <div id="palette" class="tiles"></div>
 
-    const vals=numbers.map(n=>n.v);
+                <h4>最後 → 最後から2番目 → 最後から3番目</h4>
+                <div id="restriction" class="tiles">
+                </div>
+            </div>
 
-    const MAX=400;
-    const visited=new Set();
-    const queue=[];
+            <!-- <button onclick="solve()">計算</button> -->
 
-    queue.push({sum:0, path:[]});
-    visited.add(0);
+            <div class="output-box container-box">
+                <h3>結果</h3>
+                <div class="output" id="result"></div>
+            </div>
+        </div>
 
-    while(queue.length>0){
-        const current=queue.shift();
+        <script>
+            const numbers = [
+                { v: -3, cls: "cyan" },
+                { v: -6, cls: "lightblue" },
+                { v: -9, cls: "navy" },
+                { v: -15, cls: "purple" },
+                { v: 2, cls: "lime" },
+                { v: 7, cls: "yellow" },
+                { v: 13, cls: "orange" },
+                { v: 16, cls: "red" },
+            ];
 
-        if(current.sum===remain){
-            displaySolution(current.path,restrictions);
-            return;
-        }
+            const restrictionDiv = document.getElementById("restriction");
+            const paletteDiv = document.getElementById("palette");
+            const resultDiv = document.getElementById("result");
 
-        for(let v of vals){
-            const nextSum=current.sum+v;
+            initPalette();
 
-            if(nextSum<-MAX || nextSum>MAX) continue;
-            if(visited.has(nextSum)) continue;
+            /* ---------------- UI 初期化 ---------------- */
 
-            visited.add(nextSum);
-            queue.push({
-                sum:nextSum,
-                path:[...current.path, v]
-            });
-        }
-    }
+            function initPalette() {
+                // 制限タイル選択ボタンの生成
+                numbers.forEach((n) => {
+                    const t = createRestrictionTile(n.v);
 
-    resultDiv.innerHTML="解なし";
-}
-function displaySolution(core,restrictions){
-    const resultDiv=document.getElementById("result");
-    resultDiv.innerHTML="";
+                    // クリックで選択できるように設定
+                    t.onclick = () => {
+                        if (restrictionDiv.children.length < 3) {
+                            const copy = createRestrictionTile(n.v);
 
-    const counts={};
-    core.forEach(v=>counts[v]=(counts[v]||0)+1);
+                            copy.onclick = () => restrictionDiv.removeChild(copy);
 
-    const sorted=Object.keys(counts)
-        .map(Number)
-        .sort((a,b)=>a-b);
+                            restrictionDiv.appendChild(copy);
+                        }
+                    };
 
-    sorted.forEach(v=>{
-        for(let i=0;i<counts[v];i++){
-            addTile(v);
-        }
-    });
+                    paletteDiv.appendChild(t);
+                });
 
-    restrictions.forEach(v=>addTile(v));
-}
+                // 計算実行イベント設定
+                document.querySelectorAll(".input-box input").forEach((input) => {
+                    input.oninput = () => solve();
+                });
+                let mo = new MutationObserver(() => solve());
+                mo.observe(restrictionDiv, { childList: true });
+            }
 
-function addTile(v){
-    const n=numbers.find(x=>x.v===v);
-    const t=document.createElement("div");
-    t.className="tile "+n.cls;
-    t.textContent=v;
-    document.getElementById("result").appendChild(t);
-}
-</script>
-</body>
+            function createRestrictionTile(v) {
+                const n = numbers.find((x) => x.v === v);
+
+                const t = document.createElement("div");
+                t.className = "tile " + n.cls;
+                t.textContent = v;
+
+                return t;
+            }
+            function createResultTile(v) {
+                const n = numbers.find((x) => x.v === v);
+
+                const t = document.createElement("div");
+                t.className = "output-tile " + n.cls;
+                t.textContent = v;
+
+                return t;
+            }
+
+            /* ---------------- 入力取得 ---------------- */
+
+            function getInput() {
+                const target = parseInt(document.getElementById("target").value);
+
+                const restrictions = [...restrictionDiv.children].map((t) =>
+                    parseInt(t.textContent),
+                );
+
+                return { target, restrictions };
+            }
+
+            /* ---------------- 計算ロジック ---------------- */
+
+            function calculateOptimalCombination(target, restrictions) {
+                const restrictionSum = restrictions.reduce((a, b) => a + b, 0);
+                const remain = target - restrictionSum;
+
+                const vals = numbers.map((n) => n.v);
+
+                const MAX = 400;
+                const visited = new Set();
+                const queue = [];
+
+                queue.push({ sum: 0, path: [] });
+                visited.add(0);
+
+                while (queue.length > 0) {
+                    const current = queue.shift();
+
+                    if (current.sum === remain) {
+                        return current.path;
+                    }
+
+                    for (let v of vals) {
+                        const nextSum = current.sum + v;
+
+                        if (nextSum < -MAX || nextSum > MAX) continue;
+                        if (visited.has(nextSum)) continue;
+
+                        visited.add(nextSum);
+
+                        queue.push({
+                            sum: nextSum,
+                            path: [...current.path, v],
+                        });
+                    }
+                }
+
+                return null;
+            }
+
+            /* ---------------- 表示更新 ---------------- */
+
+            function renderResult(core, restrictions) {
+                resultDiv.innerHTML = "";
+
+                if (!core) {
+                    resultDiv.textContent = "解なし";
+                    return;
+                }
+
+                const counts = {};
+
+                core.forEach((v) => (counts[v] = (counts[v] || 0) + 1));
+
+                const sorted = Object.keys(counts)
+                    .map(Number)
+                    .sort((a, b) => a - b);
+
+                // 計算結果の手順を表示
+                sorted.forEach((v) => {
+                    for (let i = 0; i < counts[v]; i++) {
+                        resultDiv.appendChild(createResultTile(v));
+                    }
+                });
+
+                // 末尾に制限を表示
+                const sortedRestrictions = restrictions.reverse();
+                sortedRestrictions.forEach((v) =>
+                    resultDiv.appendChild(createResultTile(v)),
+                );
+            }
+
+            /* ---------------- 実行 ---------------- */
+
+            function solve() {
+                resultDiv.textContent = "探索中...";
+
+                const { target, restrictions } = getInput();
+
+                const core = calculateOptimalCombination(target, restrictions);
+
+                renderResult(core, restrictions);
+            }
+        </script>
+    </body>
 </html>
