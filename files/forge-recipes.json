@@ -1,0 +1,24 @@
+{
+  "types": {
+    "axe_head": [2, -3, 13],
+    "pickaxe_head": [2, 7, -15],
+    "shovel_head": [2, -3],
+    "bars": [13, 2, 2]
+  },
+  "materials": {
+    "Wrought Iron": {
+      "color": "#6c6c6c",
+      "types": {
+        "pickaxe_head": 48,
+        "shovel_head": 101,
+        "bars": 48
+      }
+    },
+    "Bronse": {
+      "color": "#b46a00",
+      "types": {
+        "axe_head": 71
+      }
+    }
+  }
+}
