@@ -158,12 +158,19 @@
             </div>
 
             <div class="container-box">
-                <h3>レシピ選択</h3>
+                <h3>登録済みレシピ一覧</h3>
 
-                <h4>Material</h4>
+                <div style="margin-left: 30px">
+                    <li>下記から素材・クラフト対象を選択することで目標値・制限を自動入力できます。</li>
+                    <li>アイコン暗い場合も、制限は自動入力されます。目標値を手動で入力してください。</li>
+                    <li>素材・クラフト対象がない場合は、目標値・制限を手動で入力してください。</li>
+                </div>
+                <br>
+
+                <h4>素材</h4>
                 <div id="materialTiles" class="tiles"></div>
 
-                <h4>Type</h4>
+                <h4>クラフト対象</h4>
                 <div id="typeTiles" class="tiles"></div>
             </div>
 
@@ -248,29 +255,35 @@
 
                 updateTypeTiles();
             }
+
             function updateTypeTiles() {
                 typeTiles.innerHTML = "";
 
-                const types = recipeData.materials[selectedMaterial].types;
+                const materialTypes = recipeData.materials[selectedMaterial].types || {};
+                const allTypes = recipeData.types; // ← 全Type定義
 
-                Object.keys(types).forEach((type) => {
+                Object.keys(allTypes).forEach((type) => {
+                    const hasTarget = materialTypes[type] !== undefined;
+
                     const tileWrapper = document.createElement("div");
                     tileWrapper.className = "tile-img-wrapper";
-                    /* -------------------- タイル生成 ------------------- */
-                    const tile = document.createElement("div");
 
+                    const tile = document.createElement("div");
                     tile.className = "recipe-tile tile-text tile-img";
 
                     tile.title = type;
 
+                    // 未定義なら暗く
+                    if (!hasTarget) {
+                        tile.style.filter = "brightness(0.5)";
+                    }
+
                     const iconPath = "./files/type_icons/" + type + ".png";
 
                     const img = document.createElement("img");
-
                     img.src = iconPath;
 
                     img.onerror = () => {
-                        // tile.textContent = type.substring(0, 3);
                         tile.textContent = type;
                     };
 
@@ -280,27 +293,33 @@
 
                     tile.appendChild(img);
 
-                    tile.onclick = () => selectType(type, tile);
+                    tile.onclick = () => selectType(type, tile, hasTarget);
 
                     tileWrapper.appendChild(tile);
                     typeTiles.appendChild(tileWrapper);
                 });
             }
-
             /* ------------------- Select type ------------------- */
 
-            function selectType(type, tile) {
+            function selectType(type, tile, hasTarget) {
                 [...typeTiles.children].forEach((t) => (t.style.outline = ""));
 
                 tile.parentElement.style.outline = "3px solid black";
 
-                applyRecipe(selectedMaterial, type);
+                applyRecipe(selectedMaterial, type, hasTarget);
             }
 
-            function applyRecipe(material, type) {
-                const target = recipeData.materials[material].types[type];
-                const restrictions = recipeData.types[type];
-                document.getElementById("target").value = target;
+            function applyRecipe(material, type, hasTarget) {
+                const restrictions = recipeData.types[type] || [];
+
+                if (hasTarget) {
+                    const target = recipeData.materials[material].types[type];
+                    document.getElementById("target").value = target;
+                } else {
+                    // 未定義 → 0
+                    document.getElementById("target").value = 0;
+                }
+
                 setRestrictions(restrictions);
             }
 
