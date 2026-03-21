@@ -19,9 +19,8 @@
     "cleat": [7, 7, 7],
     
     "rod": [-15],
+    "screw": [2, 2, 16],
     "small_gear": [-3, 16, -15]
-
-    
 
   },
   "materials": {
@@ -50,7 +49,14 @@
         "support": 112,
         "plate": 100,
         "shovel_head": 101,
-        "chisel_head": 99
+        "chisel_head": 99,
+        "screw": 89
+      }
+    },    
+    "Black Steel": {
+      "color": "#2A2A2A",
+      "types": {
+        "mining_hammer_head": 105
       }
     }
   }

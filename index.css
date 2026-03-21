@@ -1,0 +1,185 @@
+body {
+    font-family: sans-serif;
+    user-select: none;
+}
+
+.input-number {
+    width: 40px;
+}
+
+.tiles {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 10px 0;
+}
+
+.tiles::after {
+    content: "";
+    height: 20px;
+    padding: 10px 10px;
+}
+
+.tile {
+    width: 20px;
+    height: 20px;
+    padding: 10px 10px;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.output-tile {
+    margin: 3px;
+    height: 20px;
+    padding: 10px 10px;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+
+    text-align: center;
+}
+
+.output {
+    margin-top: 20px;
+    font-size: 18px;
+
+    height: 85vh;
+
+}
+
+.cyan {
+    background: cyan;
+    color: black;
+}
+
+.lightblue {
+    background: #87cefa;
+}
+
+.navy {
+    background: navy;
+}
+
+.purple {
+    background: purple;
+}
+
+.lime {
+    background: lime;
+    color: black;
+}
+
+.yellow {
+    background: yellow;
+    color: black;
+}
+
+.orange {
+    background: orange;
+}
+
+.red {
+    background: red;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    margin: 0;
+}
+
+.in-div-img {
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* ----------------------- Layout ----------------------- */
+
+.container {
+    display: flex;
+    /* flex-direction: row; */
+}
+
+.container-main {
+    margin: 0;
+    padding: 5px;
+    overflow-y: auto;
+    height: 95vh;
+}
+
+.container-right {
+    flex: 1;
+    position: sticky;
+    margin: 0;
+    top: 0;
+    padding: 5px;
+    min-width: 90px;
+}
+
+.container-box {
+    margin: 3px;
+    padding: 10px;
+    /* margin-top: 10px; */
+    background-color: #ccc;
+
+    border-radius: 5px;
+    flex: 2;
+}
+
+/* --------------------- Calcurator --------------------- */
+
+#restriction {
+    /* height: 60px; */
+}
+
+.initial-val-icon {
+    color: green;
+}
+
+.target-val-icon {
+    color: red;
+}
+
+.recipe-tile {
+    height: 20px;
+    padding: 10px 10px;
+    border-radius: 6px;
+    color: white;
+    background-color: #777;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.tile-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.tile-img-wrapper {
+    width: 40px;
+    height: 40px;
+}
+
+.tile-img {
+    margin: 0;
+    padding: 0;
+
+    width: 63px;
+    height: 63px;
+    overflow: hidden;
+    position: relative;
+
+    transform: scale(0.63492);
+    transform-origin: top left;
+}
+
+.tile-img img {
+    position: absolute;
+    left: -320px;
+    top: -36px;
+}

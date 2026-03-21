@@ -3,204 +3,79 @@
     <head>
         <meta charset="UTF-8" />
         <title>TFC Forging Calculator</title>
-        <style>
-            body {
-                font-family: sans-serif;
-                user-select: none;
-            }
-            .container {
-                margin: 20px;
-            }
 
-            .input-number {
-                width: 40px;
-            }
-
-            .tiles {
-                display: flex;
-                gap: 8px;
-                flex-wrap: wrap;
-                margin: 10px 0;
-            }
-            .tiles::after {
-                content: "";
-                height: 20px;
-                padding: 10px 10px;
-            }
-
-            .tile {
-                width: 20px;
-                height: 20px;
-                padding: 10px 10px;
-                border-radius: 6px;
-                color: white;
-                font-weight: bold;
-                cursor: pointer;
-            }
-            .output-tile {
-                height: 20px;
-                padding: 10px 10px;
-                border-radius: 6px;
-                color: white;
-                font-weight: bold;
-            }
-            .output {
-                margin-top: 20px;
-                font-size: 18px;
-                height: 100vh;
-            }
-
-            .cyan {
-                background: cyan;
-                color: black;
-            }
-            .lightblue {
-                background: #87cefa;
-            }
-            .navy {
-                background: navy;
-            }
-            .purple {
-                background: purple;
-            }
-            .lime {
-                background: lime;
-                color: black;
-            }
-            .yellow {
-                background: yellow;
-                color: black;
-            }
-            .orange {
-                background: orange;
-            }
-            .red {
-                background: red;
-            }
-
-            h1,
-            h2,
-            h3,
-            h4 {
-                margin: 0;
-            }
-
-            .in-div-img {
-                width: 100%;
-                margin-top: 10px;
-            }
-
-            .container-box {
-                padding: 10px;
-                margin-top: 10px;
-                background-color: #ccc;
-
-                border-radius: 5px;
-            }
-
-            #restriction {
-                /* height: 60px; */
-            }
-
-            .initial-val-icon {
-                color: green;
-            }
-
-            .target-val-icon {
-                color: red;
-            }
-        </style>
-
-        <style>
-            .recipe-tile {
-                height: 20px;
-                padding: 10px 10px;
-                border-radius: 6px;
-                color: white;
-                background-color: #777;
-                font-weight: bold;
-                cursor: pointer;
-            }
-
-            .tile-text {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 12px;
-            }
-            .tile-img-wrapper {
-                width: 40px;
-                height: 40px;
-            }
-            .tile-img {
-                margin: 0;
-                padding: 0;
-
-                width: 63px;
-                height: 63px;
-                overflow: hidden;
-                position: relative;
-
-                transform: scale(0.63492);
-                transform-origin: top left;
-            }
-            .tile-img img {
-                position: absolute;
-                left: -320px;
-                top: -36px;
-            }
-        </style>
+        <link rel="stylesheet" href="index.css" />
     </head>
     <body>
         <div class="container">
-            <div class="container-box">
-                <h2>TFC Forging Calculator</h2>
-                <img class="in-div-img" src="./files/forging-gui-mark.jpg" alt="" />
-            </div>
-
-            <div class="container-box">
-                <h3>登録済みレシピ一覧</h3>
-
-                <div style="margin-left: 30px">
-                    <li>下記から素材・クラフト対象を選択することで目標値・制限を自動入力できます。</li>
-                    <li>アイコン暗い場合も、制限は自動入力されます。目標値を手動で入力してください。</li>
-                    <li>素材・クラフト対象がない場合は、目標値・制限を手動で入力してください。</li>
+            <div class="container-main">
+                <div class="container-box">
+                    <h2>TFC Forging Calculator</h2>
+                    <img class="in-div-img" src="./files/forging-gui-mark.jpg" alt="" />
                 </div>
-                <br>
 
-                <h4>素材</h4>
-                <div id="materialTiles" class="tiles"></div>
+                <div class="container-box">
+                    <h3>登録済みレシピ一覧</h3>
 
-                <h4>クラフト対象</h4>
-                <div id="typeTiles" class="tiles"></div>
-            </div>
+                    <div style="margin-left: 30px">
+                        <li>
+                            下記から素材・クラフト対象を選択することで目標値・制限を自動入力できます。
+                        </li>
+                        <li>
+                            素材・クラフト対象がない場合は、目標値・制限を手動で入力してください。
+                        </li>
+                        <li>
+                            アイコン暗い場合も制限は自動入力できます。目標値を手動で入力してください。
+                        </li>
+                    </div>
+                    <br />
 
-            <div class="input-box container-box">
-                <h3>① 目標値を入力</h3>
-                <div>
-                    <span class="initial-val-icon">▲</span>
-                    <label>初期値: </label>
-                    <input type="number" id="initial" class="input-number" value="0" />
+                    <h4>素材</h4>
+                    <div id="materialTiles" class="tiles"></div>
+
+                    <h4>クラフト対象</h4>
+                    <div id="typeTiles" class="tiles"></div>
                 </div>
-                <div>
-                    <span class="target-val-icon">▼</span>
-                    <label>目標値: </label>
-                    <input type="number" id="target" class="input-number" value="48" />
+
+                <div class="input-box container-box">
+                    <h3>① 目標値を入力</h3>
+                    <div>
+                        <span class="initial-val-icon">▲</span>
+                        <label>初期値: </label>
+                        <input
+                            type="number"
+                            id="initial"
+                            class="input-number"
+                            value="0"
+                        />
+                    </div>
+                    <div>
+                        <span class="target-val-icon">▼</span>
+                        <label>目標値: </label>
+                        <input
+                            type="number"
+                            id="target"
+                            class="input-number"
+                            value="48"
+                        />
+                    </div>
                 </div>
+                <div class="input-box container-box">
+                    <h3>② 制限を入力</h3>
+                    <div id="palette" class="tiles"></div>
+
+                    <h4>最後 → 最後から2番目 → 最後から3番目</h4>
+                    <div id="restriction" class="tiles"></div>
+                </div>
+
+                <!-- <button onclick="solve()">計算</button> -->
             </div>
-            <div class="input-box container-box">
-                <h3>② 制限を入力</h3>
-                <div id="palette" class="tiles"></div>
 
-                <h4>最後 → 最後から2番目 → 最後から3番目</h4>
-                <div id="restriction" class="tiles"></div>
-            </div>
-
-            <!-- <button onclick="solve()">計算</button> -->
-
-            <div class="output-box container-box">
-                <h3>結果</h3>
-                <div class="output" id="result"></div>
+            <div class="container-right">
+                <div class="output-box container-box">
+                    <h3>結果</h3>
+                    <div class="output" id="result"></div>
+                </div>
             </div>
         </div>
 
@@ -420,7 +295,7 @@
 
             function calculateOptimalCombination(initial, target, restrictions) {
                 const restrictionSum = restrictions.reduce((a, b) => a + b, 0);
-                const remain = (target-initial) - restrictionSum;
+                const remain = target - initial - restrictionSum;
 
                 const vals = numbers.map((n) => n.v);
 
