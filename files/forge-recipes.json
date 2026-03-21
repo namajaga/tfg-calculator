@@ -4,10 +4,11 @@
     "pickaxe_head": [2, 7, -15],
     "shovel_head": [2, -3],
     "spade_head": [2, -3],
+    "chisel_head": [-3, -3, -15],
     "mining_hammer_head": [2, 16],
     "mace_head": [-3, 16, 7],
     "wrench_tip": [-15, -3, -3],
-    "sword_head": [2, 7, -15],
+    "sword_blade": [2, 7, -15],
     "scraping_knife_blade": [-3, -15, -15],
     "plate": [-3, -3, -3],
     "wire_cutter_head": [],
@@ -15,15 +16,23 @@
     "bars_overlay": [13, 2, 2],
     "industrial_iron_bars": [13, 2, 2],
     "support": [13, 16],
-    "cleat": [7, 7, 7]
+    "cleat": [7, 7, 7],
+    
+    "rod": [-15],
+    "small_gear": [-3, 16, -15]
+
+    
+
   },
   "materials": {
     "Wrought Iron": {
       "color": "#6c6c6c",
       "types": {
+        "rod": 76,
         "pickaxe_head": 48,
         "shovel_head": 101,
-        "bars": 48
+        "bars": 48,
+        "small_gear": 110
       }
     },
     "Bronze": {
@@ -35,10 +44,13 @@
     "Steel": {
       "color": "#4A606D",
       "types": {
+        "rod": 70,
         "spade_head": 85,
         "mining_hammer_head": 49,
         "support": 112,
-        "plate": 100
+        "plate": 100,
+        "shovel_head": 101,
+        "chisel_head": 99
       }
     }
   }

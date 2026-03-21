@@ -47,6 +47,7 @@
             .output {
                 margin-top: 20px;
                 font-size: 18px;
+                height: 100vh;
             }
 
             .cyan {
@@ -405,20 +406,21 @@
             /* ---------------- 入力取得 ---------------- */
 
             function getInput() {
+                const initial = parseInt(document.getElementById("initial").value);
                 const target = parseInt(document.getElementById("target").value);
 
                 const restrictions = [...restrictionDiv.children].map((t) =>
                     parseInt(t.textContent),
                 );
 
-                return { target, restrictions };
+                return { initial, target, restrictions };
             }
 
             /* ---------------- 計算ロジック ---------------- */
 
-            function calculateOptimalCombination(target, restrictions) {
+            function calculateOptimalCombination(initial, target, restrictions) {
                 const restrictionSum = restrictions.reduce((a, b) => a + b, 0);
-                const remain = target - restrictionSum;
+                const remain = (target-initial) - restrictionSum;
 
                 const vals = numbers.map((n) => n.v);
 
@@ -491,9 +493,9 @@
             function solve() {
                 resultDiv.textContent = "探索中...";
 
-                const { target, restrictions } = getInput();
+                const { initial, target, restrictions } = getInput();
 
-                const core = calculateOptimalCombination(target, restrictions);
+                const core = calculateOptimalCombination(initial, target, restrictions);
 
                 renderResult(core, restrictions);
             }
