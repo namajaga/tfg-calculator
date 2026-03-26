@@ -65,13 +65,17 @@ function updateTypeTiles() {
         console.log(Object.keys(recipeData.inputs));
         console.log(Object.keys(types));
 
+        // カテゴリ追加
         const itemTypeCategories = document.createElement("div");
         itemTypeCategories.className = "item-type-categories";
+
+        // カテゴリラベル
         const categoryLabel = document.createElement("div");
         categoryLabel.innerText = input;
-
+        categoryLabel.className = "item-type-category-label";
         itemTypeCategories.append(categoryLabel);
 
+        // アイテム追加
         Object.keys(types).forEach((type) => {
             console.log(`[updateTypeTiles] types: ${types} ${type}`);
 
