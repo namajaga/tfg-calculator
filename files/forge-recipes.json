@@ -1,29 +1,49 @@
 {
-  "types": {
-    "axe_head": [2, -3, 13],
-    "pickaxe_head": [2, 7, -15],
-    "shovel_head": [2, -3],
-    "spade_head": [2, -3],
-    "chisel_head": [-3, -3, -15],
-    "mining_hammer_head": [2, 16],
-    "mace_head": [-3, 16, 7],
-    "wrench_tip": [-15, -3, -3],
-    "sword_blade": [2, 7, -15],
-    "scraping_knife_blade": [-3, -15, -15],
-    "plate": [-3, -3, -3],
-    "wire_cutter_head": [],
-    "bars": [13, 2, 2],
-    "bars_overlay": [13, 2, 2],
-    "industrial_iron_bars": [13, 2, 2],
-    "support": [13, 16],
-    "cleat": [7, 7, 7],
-    
-    "rod": [-15],
-    "screw": [2, 2, 16],
-    "small_gear": [-3, 16, -15]
+  "inputs": {
+    "インゴット": {
+        "pickaxe_head": [2, 7, -15],
+        "axe_head": [2, -3, 13],
+        "chisel_head": [-3, -3, -15],
+        "shovel_head": [2, -3],
+        "rod": [-15],
+        "screw": [2, 2, 16],
+        "tong_part": [],
+        "small_gear": [-3, 16, -15],
+        "bars": [13, 2, 2],
+        "industrial_iron_bars": [13, 2, 2]
+    },
+    "ダブルインゴット": {
+        "plate": [-3, -3, -3],
+        "spade_head": [2, -3],
+        "wire_cutter_head": [],
+        "wrench_tip": [-15, -3, -3],
+        "mining_hammer_head": [2, 16],
+        "bars_overlay": [13, 2, 2],
+        "mace_head": [-3, 16, 7],
+        "scraping_knife_blade": [-3, -15, -15],
+        "sword_blade": [2, 7, -15],
+        "support": [13, 16],
+        "cleat": [7, 7, 7]
+    },
+    "ダブルプレート": {
+    },
+    "rod": {
+    },
 
+    "?": {
+        "spring": [-3, 7, 7],
+
+        "羽口": [7, 7]
+    }
   },
   "materials": {
+    "Brass": {
+      "color": "#F6CD5A",
+      "types": {
+        "small_gear": 94,
+        "rod": 49
+      }
+    },
     "Wrought Iron": {
       "color": "#6c6c6c",
       "types": {
@@ -50,13 +70,16 @@
         "plate": 100,
         "shovel_head": 101,
         "chisel_head": 99,
-        "screw": 89
+        "screw": 89,
+        "羽口": 62,
+        "spring": 65
       }
     },    
     "Black Steel": {
       "color": "#2A2A2A",
       "types": {
-        "mining_hammer_head": 105
+        "mining_hammer_head": 105,
+        "rod": 99
       }
     }
   }

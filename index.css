@@ -160,9 +160,16 @@ h4 {
     font-size: 12px;
 }
 
+.item-type-categories {
+    display: block;
+}
+
 .tile-img-wrapper {
+    margin: 2px;
+    display: inline-block;
     width: 40px;
     height: 40px;
+    border-radius: 2px;
 }
 
 .tile-img {
