@@ -7,15 +7,17 @@
         "shovel_head": [2, -3],
         "rod": [-15],
         "screw": [2, 2, 16],
-        "tong_part": [],
+        "tong_part": [-3, -15, 7],
         "small_gear": [-3, 16, -15],
         "bars": [13, 2, 2],
-        "industrial_iron_bars": [13, 2, 2]
+        "industrial_iron_bars": [13, 2, 2],
+        "chain": [-15, -3 ,-3],
+        "tree_tap": [-3, 13, 13]
     },
     "ダブルインゴット": {
         "plate": [-3, -3, -3],
         "spade_head": [2, -3],
-        "wire_cutter_head": [],
+        "wire_cutter_head": [-15,-3,-3],
         "wrench_tip": [-15, -3, -3],
         "mining_hammer_head": [2, 16],
         "bars_overlay": [13, 2, 2],
@@ -27,21 +29,32 @@
     },
     "ダブルプレート": {
     },
-    "rod": {
+    "long_rod": {
+        "spring": []
+    },
+      "rod": {
+        "small_spring": [-3, 7, 7],
+        "bolt": [2, -15, -15]
     },
 
     "?": {
-        "spring": [-3, 7, 7],
 
         "羽口": [7, 7]
     }
   },
   "materials": {
+    "Copper": {
+      "color": "#E27300",
+      "types": {
+        "tree_tap": 78
+      }
+    },
     "Brass": {
       "color": "#F6CD5A",
       "types": {
         "small_gear": 94,
-        "rod": 49
+        "rod": 49,
+        "bolt": 80
       }
     },
     "Wrought Iron": {
@@ -51,7 +64,8 @@
         "pickaxe_head": 48,
         "shovel_head": 101,
         "bars": 48,
-        "small_gear": 110
+        "small_gear": 110,
+        "chain": 74
       }
     },
     "Bronze": {
@@ -72,7 +86,10 @@
         "chisel_head": 99,
         "screw": 89,
         "羽口": 62,
-        "spring": 65
+        "small_spring": 65,
+        "wire_cutter_head": 74,
+        "bolt": 86,
+        "tong_part": 66
       }
     },    
     "Black Steel": {
@@ -80,6 +97,18 @@
       "types": {
         "mining_hammer_head": 105,
         "rod": 99
+      }
+    },
+    "Red Alloy": {
+      "color": "#D24646",
+      "types": {
+        "small_gear": 43
+      }
+    },
+    "Sterling Silver": {
+      "color": "#F7F6D0",
+      "types": {
+        "rod": 58
       }
     }
   }
