@@ -30,7 +30,7 @@
     "ダブルプレート": {
     },
     "long_rod": {
-        "spring": []
+        "spring": [-3,7,7]
     },
       "rod": {
         "small_spring": [-3, 7, 7],
@@ -99,16 +99,37 @@
         "rod": 99
       }
     },
-    "Red Alloy": {
-      "color": "#D24646",
+    "Blue Steel": {
+      "color": "#6286DB",
       "types": {
-        "small_gear": 43
+        "mining_hammer_head": 72,
+        "rod": 101,
+        "spring": 112,
+        "small_gear": 77
+
+      }
+    },"Red Steel": {
+      "color": "#A13232",
+      "types": {
       }
     },
     "Sterling Silver": {
       "color": "#F7F6D0",
       "types": {
         "rod": 58
+      }
+    },
+    "Gold": {
+      "color": "#E2CF41",
+      "types": {
+        "rod": 77,
+        "small_spring": 55
+      }
+    },
+    "Red Alloy": {
+      "color": "#C86666",
+      "types": {
+        "small_gear": 43
       }
     }
   }
