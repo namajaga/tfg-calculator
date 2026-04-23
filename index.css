@@ -1,3 +1,49 @@
+/* -------------------- MARK: Common -------------------- */
+
+.cyan {
+    background: cyan;
+    color: black;
+}
+
+.lightblue {
+    background: #87cefa;
+}
+
+.navy {
+    background: navy;
+}
+
+.purple {
+    background: purple;
+}
+
+.lime {
+    background: lime;
+    color: black;
+}
+
+.yellow {
+    background: yellow;
+    color: black;
+}
+
+.orange {
+    background: orange;
+}
+
+.red {
+    background: red;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    margin: 0;
+}
+
+/* -------------------- MARK: Layout -------------------- */
+
 body {
     font-family: sans-serif;
     user-select: none;
@@ -49,54 +95,13 @@ body {
 
 }
 
-.cyan {
-    background: cyan;
-    color: black;
-}
-
-.lightblue {
-    background: #87cefa;
-}
-
-.navy {
-    background: navy;
-}
-
-.purple {
-    background: purple;
-}
-
-.lime {
-    background: lime;
-    color: black;
-}
-
-.yellow {
-    background: yellow;
-    color: black;
-}
-
-.orange {
-    background: orange;
-}
-
-.red {
-    background: red;
-}
-
-h1,
-h2,
-h3,
-h4 {
-    margin: 0;
-}
 
 .in-div-img {
     width: 100%;
     margin-top: 10px;
 }
 
-/* ----------------------- Layout ----------------------- */
+/* -------------------- MARK: Layout -------------------- */
 
 .container {
     display: flex;
@@ -227,3 +232,67 @@ img {
     -webkit-user-drag: none;
     -moz-user-select: none;
 }
+
+/* ---------------- Responsive ---------------- */
+
+
+/* タブレット以下 */
+/*
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .container-right {
+        position: static;
+        width: 100%;
+        min-width: unset;
+    }
+
+    .container-main {
+        height: auto;
+        overflow-y: visible;
+    }
+
+    .output {
+        height: auto;
+    }
+}
+
+/* スマホ */
+/* 
+@media (max-width: 600px) {
+    body {
+        font-size: 14px;
+    }
+
+    .container-box {
+        padding: 8px;
+    }
+
+    .tile {
+        width: 16px;
+        height: 16px;
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .output-tile {
+        padding: 6px;
+        font-size: 12px;
+    }
+
+    .input-number {
+        width: 60px;
+    }
+}
+/* 
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .container-right {
+        order: 1;
+    }
+} */

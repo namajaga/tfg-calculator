@@ -12,7 +12,9 @@
         "bars": [13, 2, 2],
         "industrial_iron_bars": [13, 2, 2],
         "chain": [-15, -3 ,-3],
-        "tree_tap": [-3, 13, 13]
+        "tree_tap": [-3, 13, 13],
+        "hammer_head": [2, 16],
+        "lamp": [7,7,-15]
     },
     "ダブルインゴット": {
         "plate": [-3, -3, -3],
@@ -27,7 +29,12 @@
         "support": [13, 16],
         "cleat": [7, 7, 7]
     },
+    "プレート": {
+      "bucket": [7, 7, 7]
+    },
     "ダブルプレート": {
+      "chestplate": [-3, -3, 13],
+      "tuyere": [7, 7]
     },
     "long_rod": {
         "spring": [-3,7,7]
@@ -39,7 +46,6 @@
 
     "?": {
 
-        "羽口": [7, 7]
     }
   },
   "materials": {
@@ -85,11 +91,13 @@
         "shovel_head": 101,
         "chisel_head": 99,
         "screw": 89,
-        "羽口": 62,
+        "tuyere": 62,
         "small_spring": 65,
         "wire_cutter_head": 74,
         "bolt": 86,
-        "tong_part": 66
+        "tong_part": 66,
+        "small_gear": 77,
+        "bars": 71
       }
     },    
     "Black Steel": {
@@ -105,12 +113,20 @@
         "mining_hammer_head": 72,
         "rod": 101,
         "spring": 112,
-        "small_gear": 77
+        "small_gear": 77,
+        "axe_head": 90,
+        "pickaxe_head": 67,
+        "spade_head": 91,
+        "bucket": 62,
+        "lamp": 74,
+        "chestplate": 88
 
       }
     },"Red Steel": {
       "color": "#A13232",
       "types": {
+        "hammer_head": 88,
+        "bucket": 105
       }
     },
     "Sterling Silver": {
